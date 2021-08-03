@@ -1,8 +1,13 @@
+from sha1 import sha1
 import requests
 
 url = "https://api.pwnedpasswords.com/range/"
-password = input("please input a password")
+password = sha1(input("input a password: ").encode())
 
-response = requests.request("GET", url+password)
+hashSlice = password[:5]
+key = password[5:-1]
+
+#Make an api call for HaveIBeenPwned
+response = requests.request("GET", url+first)
 
 print(response.text)
