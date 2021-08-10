@@ -2,13 +2,24 @@ from sha1 import sha1
 import requests
 
 url = "https://api.pwnedpasswords.com/range/"
-password = sha1(input("input a password: ").encode())
+input = input("input a password: ")
+password = sha1(input.encode())
 
 hashSlice = password[:5]
-key = password[5:-1]
+key = password[5:].upper()
 
-print("Key: ", key,"\n\n")
+
+print("Key: ", key,"\n")
 #Make an api call for HaveIBeenPwned
 response = requests.request("GET", url+hashSlice)
 
-print(response.text)
+
+#split payload by newline
+pwned = False
+hashes = response.text.split('\n')
+for hash in hashes:
+    if key in hash and not pwned:
+        pwned = True
+        times = hash.split(':')[1]
+
+print("Password %s has been pwned %s timezzzzzzz."%(input,times))
