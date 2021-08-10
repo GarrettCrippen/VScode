@@ -9,7 +9,7 @@ hashSlice = password[:5]
 key = password[5:].upper()
 
 
-print("Key: ", key,"\n")
+#print("Key: %s \n" %key)
 #Make an api call for HaveIBeenPwned
 response = requests.request("GET", url+hashSlice)
 
@@ -22,4 +22,6 @@ for hash in hashes:
         pwned = True
         times = hash.split(':')[1]
 
-print("Password %s has been pwned %s timezzzzzzz."%(input,times))
+print(type(times))
+
+print(F'Password {input} has been pwned {times} timezzzzzzz.')
