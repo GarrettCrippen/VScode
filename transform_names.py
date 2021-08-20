@@ -1,8 +1,12 @@
-from atheletes_df import create_df
+from athletes_df import create_df
 
 def ap2(name,suffix, password_variations):
     password_variations.append(f'{name.capitalize()}{suffix}')
     password_variations.append(f'{name}{suffix}')
+    password_variations.append(f'{name.capitalize()}{suffix}!')
+    password_variations.append(f'{name}{suffix}!')
+    password_variations.append(f'{name.capitalize()}{suffix}$')
+    password_variations.append(f'{name}{suffix}$')
 
 #1638 variations, total = 1638*100 = alot
 def transform_data(names):
@@ -10,8 +14,10 @@ def transform_data(names):
     atheletes = {}
 
     for name in names:
+        #alternatively, use regex = True
         name = name.replace('-','')
         password_variations = []
+        ap2(name,'',password_variations)
         for i in range(0,9):
             ap2(name,f'{i}',password_variations)
 
