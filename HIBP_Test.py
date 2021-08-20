@@ -12,7 +12,7 @@ def encode_sha1(data):
 def main():
     password_plain = input("input a password: ")
     password_sha1 = encode_sha1(password_plain.encode())
-
+    
     key_upper = password_sha1[:5]
     url = "https://api.pwnedpasswords.com/range"
     response = requests.get(f"{url}/{key_upper}")

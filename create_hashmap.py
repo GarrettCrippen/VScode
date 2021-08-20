@@ -7,13 +7,20 @@ def encode_sha1(data):
     h.update(data)
     return h.hexdigest()
 
-dict = {}
-password_variations = transform_data(create_df()['name'])
-for hash in password_variations:    
-    upper = encode_sha1(hash.encode())[:5]
-    if upper not in dict:
-        dict[upper]=hash
-    else:
-        print(f'duplicate {dict[upper]} to {hash}')
+def create_hashmap():
+    dict = {}
+    athletes = transform_data(create_df()['name'])
 
-print(len(dict))
+    for name in athletes:  
+        for to_hash in athletes[name]:
+            upper = encode_sha1(to_hash.encode())[:5]
+            lower = encode_sha1(to_hash.encode())[5:]
+            if upper not in dict:
+                dict[upper]=[(lower,to_hash)]
+
+            else:
+                dict[upper].append((lower,to_hash))
+                print(f'for {to_hash}: appended {lower} to {upper}, shares hash with {dict[upper][0][1]}')
+
+    print(f'There are: {len(dict.keys())} unique hashes.')
+    return dict

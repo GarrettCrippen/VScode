@@ -45,4 +45,5 @@ def create_df():
    df['endorsements']=pandas.to_numeric(df['endorsements'],errors='coerce')
    df['followers']=pandas.to_numeric(df['followers'],errors='coerce')
 
+   print(df)
    return df

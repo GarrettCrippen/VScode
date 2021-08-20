@@ -1,24 +1,27 @@
 from atheletes_df import create_df
 
-dict = {}
-password_variations = []
-def ap2(name,suffix):
+def ap2(name,suffix, password_variations):
     password_variations.append(f'{name.capitalize()}{suffix}')
     password_variations.append(f'{name}{suffix}')
 
 #1638 variations, total = 1638*100 = alot
 def transform_data(names):
 
+    atheletes = {}
+
     for name in names:
-        transformed = ''
+        name = name.replace('-','')
+        password_variations = []
         for i in range(0,9):
-            ap2(name,f'{i}')
+            ap2(name,f'{i}',password_variations)
 
             for j in range(0,9):
-                ap2(name,f'{i}{j}')
+                ap2(name,f'{i}{j}',password_variations)
 
-                for k in range(0,9):
-                    ap2(name,f'{i}{j}{k}')
+                # for k in range(0,9):
+                #     ap2(name,f'{i}{j}{k}',password_variations)
 
-transform_data(create_df()['name'])
-print(len(password_variations))
+        atheletes[name]=password_variations
+    
+    return atheletes
+
