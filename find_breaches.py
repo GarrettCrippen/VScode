@@ -17,7 +17,7 @@ def hibp(key_upper,key_lower):
         
     return breached
 
-f=open('result.json',)
+f=open('result2.json',)
 data = json.load(f)
 
 df=create_df()
@@ -32,7 +32,7 @@ for entries in data:
         print(f'for {athletes[1]} {entries}:{athletes[0]}')
         breached = hibp(entries.upper(),athletes[0].upper())
         try:
-            f=open('breaches2.txt','a')
+            f=open('breaches.txt','a')
         except:
             pass
         if breached !=-1: 
