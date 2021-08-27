@@ -17,7 +17,7 @@ def hibp(key_upper,key_lower):
         
     return breached
 
-f=open('result.json',)
+f=open('result2.json',)
 data = json.load(f)
 
 df=create_df()
