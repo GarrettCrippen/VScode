@@ -112,6 +112,7 @@ def create_df():
    df['sport']=df['sport'].str.replace('•','')
    df[df.columns]=df.apply(lambda x: x.str.strip())
 
+   df.loc[df['sport']=='American football','sport']='American Football'
    #convert objects to numeric {rating,endorsements,followers}
    df['rating']=pandas.to_numeric(df['rating'],errors='coerce')
 
@@ -123,6 +124,8 @@ def create_df():
    df.loc[df['suffix2']=='m','followers']=df['followers']*10**6
    df.loc[df['suffix2']=='k','followers']=df['followers']*10**3
 
+
+   df.loc[df['name']=='thomas-mller','name']='thomas-muller'
    df=df.drop(columns={'suffix1','suffix2'})
 
 
@@ -134,4 +137,5 @@ def create_df():
    df=pandas.concat([df,df3]).reset_index()
 
    return df
+   #return df.loc[df['name']=='thomas-muller']
    #return df3.reset_index()
